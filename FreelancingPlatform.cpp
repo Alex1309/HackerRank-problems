@@ -13,8 +13,6 @@ using namespace std;
 
 long minCost(int numProjects,vector <int>projectId,vector <int>bid){
 	
-	
-	
 	pair<long, long> pairt[projectId.size()];
 
 	    // Storing the respective array
@@ -70,10 +68,55 @@ int main() {
 	b.push_back(6);
 	b.push_back(9);
 
-	cout <<minCost(n,pr,b);
-	cout<<endl;
-
-
-
+	cout <<minCost(n,pr,b)<<endl;
 
 }
+//other way
+
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <map>
+
+long minCost(int numProjects,vector <int>projectId,vector <int>bid){
+
+long mini[numProjects];
+long max=10000000000;
+for(long i=0;i<numProjects;i++){
+    mini[i]=max;
+}
+for(long i=0;i<bid.size();i++){
+
+    if(bid[i]<mini[projectId[i]]){
+        mini[projectId[i]]=bid[i];
+    }
+}
+for(long i=0;i<numProjects;i++){
+    if(mini[i]==max){
+        return -1;
+    }
+}
+
+long sum=0;
+for(long i =0;i<numProjects;i++){
+    sum+=mini[i];
+}
+return sum;
+
+}
+
+int main() {
+
+    int n=2;
+    vector<int> pr;
+    pr.push_back(1);
+    pr.push_back(1);
+
+    vector<int> b;
+    b.push_back(6);
+    b.push_back(9);
+
+    cout <<minCost(n,pr,b)<<endl;
+
+}
+
